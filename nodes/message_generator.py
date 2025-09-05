@@ -7,7 +7,7 @@ from models.llm_result import (
     MessageGeneratorResult,
     TopicSuggesterResult,
 )
-from utils.llm import invoke_llm, LLM_USE_CACHE
+from utils.llm import invoke_llm,LLM_USE_CACHE
 
 
 def generate_message(

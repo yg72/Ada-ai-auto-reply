@@ -2,16 +2,19 @@ import json
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from models.context import Context
-from models.llm_result import ClassifierResult, TopicSuggesterResult
-from utils.llm import invoke_llm, LLM_USE_CACHE
+from models.llm_result import ClassifierResult, TopicSuggesterResult, InferenceResult
+from utils.llm import invoke_llm,LLM_USE_CACHE
 
 
 def suggest_topics(
-    context: Context, classified_category: ClassifierResult, dry_run: bool = False
+    context: Context, 
+    classified_category: ClassifierResult, 
+    inferred_results: InferenceResult,
+    dry_run: bool = False
 ) -> TopicSuggesterResult:
     system_prompt = f"""\
 You are a helpful assistant that suggests topics for the job seeker to reply for a potential referral or intro call.
-You will be given the conversation history, classified category, job seeker profile (optional), and referrer profile (optional).
+You will be given the conversation history, classified category, inferred results (optional), job seeker profile (optional), and referrer profile (optional).
 You will need to provide topics along with confidence score and reason.
 When suggesting topics, always evaluate the latest messages first.
 Never make up facts.
@@ -31,6 +34,11 @@ Conversation Messages:
 
 Classified Category:
 {classified_category}
+"""
+    if inferred_results:
+        user_prompt += f"""
+Inferred Results:
+{inferred_results}
 """
 
     if context.user_profile:

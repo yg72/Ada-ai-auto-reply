@@ -16,7 +16,7 @@ def handler(event, context):
     """
     logger.info(f"Event: {json.dumps(event, indent=2)}")
 
-    state = json.loads(event["body"])["state"]
+    state = json.loads(event["body"])
     state = State(**state)
     state = orchestrate(state)
 

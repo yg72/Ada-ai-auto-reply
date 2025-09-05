@@ -28,3 +28,27 @@ class MessageGeneratorResult(BaseModel):
     message: str
     confidence: float
     reason: str
+
+
+class Action(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    action: str
+    confidence: float
+    reason: str
+
+class ActionSummarizerResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    actions: list[Action]
+
+
+class Inference(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    inference: bool
+    confidence: float
+    reason: str
+
+class InferenceResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    inferences: list[Inference] 
+    
+       

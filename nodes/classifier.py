@@ -12,9 +12,10 @@ def classify_conversation(
 ) -> Category:
     system_prompt = f"""\
 You are a helpful assistant that classifies the whole conversation between job seeker and referrer into one of the following categories.
-When classifying, always evaluate the **last** messages.
-If multiple categories are applicable, you should choose the one indicating the last status of the conversation.
+If the conversation is not ended, always mark as "no_reply" if the referrer doesn't reply to the job seeker's latest message.
+If multiple categories are applicable, you should choose the one indicating the latest status of the conversation.
 You will need to provide confidence score, reason, and referenced message ids (only include the most relevant message ids to the classification).
+When classifying, always evaluate the latest messages first.
 Never make up facts.
 
 Category Definition:
@@ -24,8 +25,6 @@ Category Definition:
     user_prompt = f"""\
 Conversation Messages:
 {context.messages}
-
-The last message is from {context.messages[-1].role}
 """
 
     if context.user_profile:

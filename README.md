@@ -75,3 +75,24 @@ chmod +x ./build.sh
 - Set `AI_AUTO_REPLY_LAMBDA_SOURCE_PATH` to be the path to the `dist` folder of this repo, e.g. `../../tuilink-project-ai-auto-reply/dist/`
 
 - Set `AI_AUTO_REPLY_LAMBDA_HANDLER` to be `ai_auto_reply.handler`
+
+4. Body Input 
+{
+  "step": null,
+  "context": {
+    "messages": [
+        <your_messages>
+    ],
+    "user_profile": null,
+    "referrer_profile": null
+  },
+  "classified_category": null,
+  "suggested_topics": null,
+  "summarized_actions": null,
+  "fulfilled_actions": null,
+  "inferred_results": null,
+  "selected_topics": null,
+  "generated_reply_message": null,
+  "auto_assign_actions": false,
+  "auto_assign_topics": false
+}
