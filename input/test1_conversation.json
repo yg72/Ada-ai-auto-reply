@@ -1,0 +1,50 @@
+[
+  {
+    "id": "06aebc21-ed8c-4c8e-89c0-35dabb049025",
+    "role": "job seeker",
+    "name": "Mingzhi Li",
+    "body_text": "Hi Niraj,\nI'm Mingzhi. I'm eager to explore the new Software Developer opening at Oracle. Could we connect for more info or a referral?\nKind regards,\nMingzhi.",
+    "attachments_text": "",
+    "delivered_at": 1741098268349
+  },
+  {
+    "id": "56c4d155-5b08-4758-b44c-f5fe648bf4e1",
+    "role": "referrer",
+    "name": "Niraj P.",
+    "body_text": "Hi, Mingzhi,\nSure, we can connect. \nPlease share your resume and we'll start from there. \nRegards\nNiraj",
+    "attachments_text": "",
+    "delivered_at": 1741098324075
+  },
+  {
+    "id": "0ec422b2-cb10-4786-a18c-232c07435afc",
+    "role": "job seeker",
+    "name": "Mingzhi Li",
+    "body_text": "Hi Niraj,\n\nThank you so much! I really appreciate your help.\n Please check the resume in the attachment. Job ID:281179.",
+    "attachments_text": "",
+    "delivered_at": 1741142060160
+  },
+  {
+    "id": "97b93f66-36eb-43cb-82f1-4a4026599de7",
+    "role": "referrer",
+    "name": "Niraj P.",
+    "body_text": "Hey, Mingzhi,\n I checked your resume. It looks good. However, your experience is a bit less for this role. \nBut I can refer you.",
+    "attachments_text": "",
+    "delivered_at": 1741142998262
+  },
+  {
+    "id": "4c35c170-fd44-4586-bea0-a7b78eeb8ed2",
+    "role": "job seeker",
+    "name": "Mingzhi Li",
+    "body_text": "Hi Niraj,\n\nThank you so much! I really appreciate your help.",
+    "attachments_text": "",
+    "delivered_at": 1741229407029
+  },
+  {
+    "id": "7d08a5c2-be42-437d-9ebd-38654e91c8ab",
+    "role": "referrer",
+    "name": "Niraj P.",
+    "body_text": "Hi Mingzhi, Please check your email. \n No worries!",
+    "attachments_text": "",
+    "delivered_at": 1741143003946
+  }
+]

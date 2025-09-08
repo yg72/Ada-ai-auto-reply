@@ -9,10 +9,10 @@ from nodes.inferencer import inference_results
 from langgraph.graph import START, END, StateGraph
 
 
-CATEGORIES = [Category(**category) for category in read_file("/Users/yiwengeng/Documents/Tuilink/yiwen-auto-reply/input/categories.json")]
+CATEGORIES = [Category(**category) for category in read_file("./input/categories.json")]
 EXTENDED_CATEGORY_LOOKUP = {
     category["category"]: ExtendedCategory(**category)
-    for category in read_file("/Users/yiwengeng/Documents/Tuilink/yiwen-auto-reply/input/categories.json")
+    for category in read_file("./input/categories.json")
 }
 
 # Node definitions
@@ -101,10 +101,10 @@ def orchestrate(state: State): # -> State:
     # Add nodes
     workflow.add_node("classify", classifier)
     workflow.add_node("summarize_actions", actions_summarizer)
-    workflow.add_node("auto_assign_actions", auto_assign_actions)
+    workflow.add_node("auto_actions", auto_assign_actions)
     workflow.add_node("infer", inferencer)
     workflow.add_node("suggest_topics", topic_suggester)
-    workflow.add_node("auto_assign_topics", auto_assign_topics)
+    workflow.add_node("auto_topics", auto_assign_topics)
     workflow.add_node("generate_message", message_generater)
     workflow.add_node("no_reply_needed", no_reply)
 
@@ -112,13 +112,13 @@ def orchestrate(state: State): # -> State:
     workflow.add_edge(START, "classify")
     workflow.add_conditional_edges("classify", route_after_classify)
     # After summarize_actions → 
-    workflow.add_edge("summarize_actions", "auto_assign_actions")
-    workflow.add_conditional_edges("auto_assign_actions", route_after_summarize)
+    workflow.add_edge("summarize_actions", "auto_actions")
+    workflow.add_conditional_edges("auto_actions", route_after_summarize)
     # After infer → suggest_topics
     workflow.add_edge("infer", "suggest_topics")
     # After suggest_topics → generate_message if topics are selected
-    workflow.add_edge("suggest_topics", "auto_assign_topics")
-    workflow.add_conditional_edges("auto_assign_topics", route_after_suggest) 
+    workflow.add_edge("suggest_topics", "auto_topics")
+    workflow.add_conditional_edges("auto_topics", route_after_suggest)
     # End edges
     workflow.add_edge("generate_message", END)
     workflow.add_edge("no_reply_needed", END)
