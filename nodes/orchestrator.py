@@ -36,7 +36,12 @@ def orchestrate(
         # Add actions summarizer
         if state.summarized_actions is None:
             state.summarized_actions = summarize_actions(
-                    state.context, state.classified_category, dry_run=False)
+                state.context, state.classified_category, dry_run=False
+            )
+
+        if state.auto_assign_actions:
+            state.fulfilled_actions = state.summarized_actions
+        
         if state.fulfilled_actions is None:
             state.step = "next: take actions"
             return state
@@ -45,14 +50,14 @@ def orchestrate(
                 state.inferred_results = inference_results(
                     state.context, state.classified_category, state.summarized_actions, dry_run=False)
 
+            if state.suggested_topics is None:
+                state.suggested_topics = suggest_topics(
+                    state.context, state.classified_category, state.inferred_results, dry_run=False)
+            if state.auto_assign_topics:
+                state.selected_topics = state.suggested_topics
             if state.selected_topics is None:
-                if state.suggested_topics is None:
-                    state.suggested_topics = suggest_topics(
-                        state.context, state.classified_category, state.inferred_results, dry_run=False
-                    )
                 state.step = "next: select topics"
                 return state
-
             # If topics are selected, generate the reply message
             else:
                 if state.generated_reply_message is None:
@@ -70,14 +75,14 @@ def orchestrate(
         # If reply is needed, check if topics are selected
         if extended_category.reply_needed:
             # If no topics are selected, prompt the human to select suggestedtopics
+            if state.suggested_topics is None:
+                state.suggested_topics = suggest_topics(
+                    state.context, state.classified_category, state.inferred_results, dry_run=False)
+            if state.auto_assign_topics:
+                state.selected_topics = state.suggested_topics
             if state.selected_topics is None:
-                if state.suggested_topics is None:
-                    state.suggested_topics = suggest_topics(
-                        state.context, state.classified_category, state.inferred_results, dry_run=False
-                    )
                 state.step = "next: select topics"
                 return state
-
             # If topics are selected, generate the reply message
             else:
                 if state.generated_reply_message is None:

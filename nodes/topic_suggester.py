@@ -3,7 +3,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 from models.context import Context
 from models.llm_result import ClassifierResult, TopicSuggesterResult, InferenceResult
-from utils.llm import invoke_llm,LLM_USE_CACHE
+from utils.llm import invoke_llm, LLM_USE_CACHE
 
 
 def suggest_topics(
